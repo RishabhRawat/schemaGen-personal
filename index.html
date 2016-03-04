@@ -3,23 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <title>schematic</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.4.1/snap.svg-min.js"></script>
-    <link >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jointjs/0.9.6/joint.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.2.1/backbone-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jointjs/0.9.7/joint.min.js"></script>
 </head>
-<body>
+<body bgcolor="#f0f8ff">
 <!--Gate length = (35 + 25) + 20 + 20 = 100-->
 <!--Gate height = 50-->
-
-<div id="schematic_container">
-    <svg  height="30em" width="100%" id="schema_surface">
-        <!--<use xlink:href="gates.svg#andgate" x="50" y="50"/>-->
-        <!--<use xlink:href="gates.svg#orgate" x="50" y="150"/>-->
-        <!--<use xlink:href="gates.svg#notgate" x="50" y="250"/>-->
-        <!--<use xlink:href="gates.svg#inputgate" x="50" y="350"/>-->
-        <!--<use xlink:href="gates.svg#outputgate" x="50" y="450"/>-->
-    </svg >
+<div id="schematic_container" style="height: 30em">
 </div>
+
+<svg>
+    <defs>
+        <path d="M0 0 h 20" id="rev_gate_link"/>
+        <path d="M0 0 h-20" id="for_gate_link"/>
+        <path d="M0 0 h35 a25 25 0 1 1 0 50  h-35  Z" id="and_curve"/>
+        <path d="M0 0 Q40 0 60 25 Q40 50 0 50 q20 -25 0 -50 M0 15 l8 0 M0 35 l8 0" id="or_curve"/>
+        <path d="M0 0 L50 25 a5 5 0 1 0 10 0 a5 5 0 1 0 -10 0 L0 50 Z" id="not_curve"/>
+        <path d="M0 15 h40 L60 25 L40 35 h-40 Z" id="input_curve"/>
+        <path d="M0 25 L20 15 h40 v20 h-40 Z" id="output_curve"/>
+        <g id="andgate" class="component">
+            <path d="M0 0 h35 a25 25 0 1 1 0 50  h-35  Z" transform="translate(20 0)"/>
+            <path d="M0 0 h20" transform="translate(0 15)"/>
+            <path d="M0 0 h20" transform="translate(0 35)"/>
+            <path d="M0 0 h-20" transform="translate(100 25)"/>
+        </g>
+        <g id="orgate" class="component">
+            <path d="M0 0 Q40 0 60 25 Q40 50 0 50 q20 -25 0 -50 M0 15 l8 0 M0 35 l8 0" transform="translate(20 0)"/>
+            <path d="M0 0 h20" transform="translate(0 15)"/>
+            <path d="M0 0 h20" transform="translate(0 35)"/>
+            <path d="M0 0 h-20" transform="translate(100 25)"/>
+        </g>
+        <g id="notgate" class="component">
+            <path d="M0 0 L50 25 a5 5 0 1 0 10 0 a5 5 0 1 0 -10 0 L0 50 Z" transform="translate(20 0)"/>
+            <path d="M0 0 h20" transform="translate(0 25)"/>
+            <path d="M0 0 h-20" transform="translate(100 25)"/>
+        </g>
+        <g id="inputgate" class="component">
+            <path d="M0 15 h40 L60 25 L40 35 h-40 Z" transform="translate(20 0)"/>
+            <path d="M0 0 h-20" transform="translate(100 25)"/>
+        </g>
+        <g id="outputgate" class="component">
+            <path d="M0 25 L20 15 h40 v20 h-40 Z" transform="translate(20 0)"/>
+            <path d="M0 0 h20" transform="translate(0 25)"/>
+        </g>
+    </defs>
+</svg>
 <script src="schematic.js"></script>
 </body>
 </html>
